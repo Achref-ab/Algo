@@ -1,49 +1,37 @@
-#include<stdio.h>
-int main (){
-   int i,j;
-   char t[5][5]={{'1','2','3','4','5'},
-      {'7','a','c','8','d'},
-      {'c','9','4','z','8'},
-      {'5','6','p','n','3'},
-      {'2','9','t','m','k'}
-     };
-        for(i=0;i<5;i++){
-                for(j=0;j<5;j++){
-                        printf("%c",t[i][j]);
-                };
-                printf("\n");
-        };
-        printf("\n");
-        for(i=0;i<5;i+=2){
-                for(j=0;j<5;j+=2){
-                        printf("%c",t[i][j]);
-                };
-                printf("\n");
-        };
-        printf("\n");
-        for(i=0;i<5;i++){
-                printf("%c",t[i][i]);
-        };
+#include <stdio.h>
 
-        printf("\n");
-        for(i=0;i<5;i++){
-                printf("%c",t[i][4-i]);
-        }
-        int k;
-        printf("\n");
-         for(i=0;i<5;i++){
-                for(j=0;j<i;j++){
-                        k=t[i][j];
-                        t[i][j]=t[j][i];
-                        t[j][i]=k;
-                }
-        }
-          printf("\n");
-        for(i=0;i<5;i++){
-                for(j=0;j<5;j++){
-                        printf("%c",t[i][j]);
-                };
-                printf("\n");
-        };
+int main() {
+    int n;
+    printf("Enter the size of the square matrix (n): ");
+    scanf("%d", &n);
 
+    int a[n][n];
+
+    printf("Enter the elements of the matrix:\n");
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            scanf("%d", &a[i][j]);
+
+    printf("\nOriginal Matrix:\n");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++)
+            printf("%4d", a[i][j]);
+        printf("\n");
+    }
+
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < i; j++) {
+            int temp = a[i][j];
+            a[i][j] = a[j][i];
+            a[j][i] = temp;
+        }
+
+    printf("\nMatrix after swapping triangles:\n");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++)
+            printf("%4d", a[i][j]);
+        printf("\n");
+    }
+
+    return 0;
 }
