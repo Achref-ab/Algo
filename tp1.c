@@ -2,7 +2,7 @@
 
 int main() {
     int n;
-    printf("Enter the size of the square matrix (n): ");
+    printf("Enter the size of the matrix (n): ");
     scanf("%d", &n);
 
     int a[n][n];
