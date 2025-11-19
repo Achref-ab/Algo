@@ -1,53 +1,62 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-int add(int a, int b) {
-    return a + b;
+char *ChargerChaine(int N) {
+    char *chaine = (char *)malloc((N + 1) * sizeof(char));
+    if (chaine == NULL) {
+        printf("Erreur d'allocation mémoire.\n");
+        exit(1);
+    }
+    printf("Entrez une chaine de %d caracteres (sans espaces): ", N);
+    scanf("%s", chaine);
+    return chaine;
 }
 
-int max(int a, int b) {
-    return (a > b) ? a : b;
+int Longueur(const char *ch) {
+    int len = 0;
+    while (ch[len] != '\0') {
+        len++;
+    }
+    return len;
 }
 
-float average(int arr[], int n) {
-    int sum = 0;
-    for (int i = 0; i < n; i++)
-        sum += arr[i];
-    return n ? (float)sum / n : 0.0f;
+void ChargerTab(const char *p, char Tab[]) {
+    int i = 0;
+    while (p[i] != '\0') {
+        Tab[i] = p[i];
+        i++;
+    }
+    Tab[i] = '\0';
+}
+
+void InverserTab(const char Tab[], char T[], int m) {
+    for (int i = 0; i < m; i++) {
+        T[i] = Tab[m - i - 1];
+    }
+    T[m] = '\0';
+}
+
+void AfficherTab(const char Tab[]) {
+    printf("%s\n", Tab);
 }
 
 int main() {
-    int n;
-    printf("Enter number of elements: ");
-    if (scanf("%d", &n) != 1 || n <= 0) {
-        printf("Invalid number of elements.\n");
-        return 1;
-    }
-
-    int *arr = malloc(sizeof(int) * n);
-    if (!arr) {
-        printf("Memory allocation failed.\n");
-        return 1;
-    }
-
-    printf("Enter %d integers:\n", n);
-    for (int i = 0; i < n; i++) {
-        if (scanf("%d", &arr[i]) != 1) {
-            printf("Invalid input.\n");
-            free(arr);
-            return 1;
-        }
-    }
-
-    int largest = arr[0];
-    for (int i = 1; i < n; i++)
-        largest = max(largest, arr[i]);
-
-    float avg = average(arr, n);
-
-    printf("\nLargest number = %d\n", largest);
-    printf("Average = %.2f\n", avg);
-
-    free(arr);
+    int N;
+    printf("Entrez la taille de la chaine: ");
+    scanf("%d", &N);
+    getchar();
+    char *chaine = ChargerChaine(N);
+    int longueur = Longueur(chaine);
+    printf("La longueur de la chaine est: %d\n", longueur);
+    char Tab[longueur + 1];
+    ChargerTab(chaine, Tab);
+    char Inverse[longueur + 1];
+    InverserTab(Tab, Inverse, longueur);
+    printf("Chaine originale: ");
+    AfficherTab(Tab);
+    printf("Chaine inversee: ");
+    AfficherTab(Inverse);
+    free(chaine);
     return 0;
 }
